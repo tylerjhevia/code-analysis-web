@@ -139,17 +139,17 @@
          */
         function shuffleList(list) {
             // Make a copy & don't mutate the passed in list
-
+            let result = Array.from(list);
             let tmp, j, i = list.length - 1
 
             for (; i > 0; i -= 1) {
                 j = Math.floor(Math.random() * (i + 1));
-                tmp = list[i];
-                list[i] = list[j];
-                list[j] = tmp;
+                [tmp, list[i]] = [list[i], tmp];
+                [list[i], list[j]] = [list[j], list[i]];
+                [list[j], tmp] = [tmp, list[j]]
             }
 
-            return list;
+            return result;
         }
 
 
