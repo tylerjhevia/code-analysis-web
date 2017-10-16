@@ -46,44 +46,45 @@
    -->
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-    <head>
-        <title>Single Page Application</title>
 
-        <style>
+<head>
+    <title>Single Page Application</title>
+
+    <style>
         body {
             margin: 0px;
             padding: 0px;
         }
-
+        
         .app-container {
             width: 400px;
             margin: 0 auto 0 auto;
         }
-
+        
         .image {
             width: 100px;
             height: 100px;
         }
-
+        
         .list-container {
             width: 100%;
             border: 1px solid black;
         }
-        </style>
-    </head>
-    <body>
-        <!-- Container for our application -->
-        <div id="app"></div>
+    </style>
+</head>
+
+<body>
+    <!-- Container for our application -->
+    <div id="app"></div>
 
 
-        <!-- 3rd Party Scripts -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+    <!-- 3rd Party Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
 
 
-        <!-- Our Application Logic -->
-        <script>
-
+    <!-- Our Application Logic -->
+    <script>
         /*==================================================
 
            API
@@ -101,19 +102,13 @@
          *        ...
          *    ]
          */
-        function getPersonList() {
-            return new Promise((resolve, reject) => {
-                fetch('https://willowtreeapps.com/api/v1.0/profiles')
-                .then(response => {
-                    if (response.status !== 200) {
-                        reject(new Error("Error!"));
-                    }
 
-                    response.json().then(imageList => {
-                        resolve(imageList);
-                    });
-                });
-            });
+
+        function getPersonList() {
+            return fetch('https://willowtreeapps.com/api/v1.0/profiles')
+                .then(response => response.json())
+                .then(imageList => { return imageList })
+                .catch(error => console.log('error', error))
         }
 
 
@@ -186,7 +181,7 @@
          *
          */
         function sortObjListByProp(prop) {
-            return function(objList) {
+            return function (objList) {
                 // Make a copy & don't mutate the passed in list
                 let result = objList.slice(1);
 
@@ -300,7 +295,7 @@
             React.createElement(App),
             document.getElementById('app')
         );
+    </script>
+</body>
 
-        </script>
-    </body>
 </html>
