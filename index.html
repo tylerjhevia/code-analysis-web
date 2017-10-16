@@ -127,9 +127,10 @@
             return person.firstName;
         };
 
+
         // headshot URLs are scheme relative //
         // prepend http: to prevent invalid schemes like file:// or uri://
-        const getImageUrl = (person) => {
+        function getImageUrl(person) {
             return `http:${person.headshot.url}`;
         };
 
@@ -138,7 +139,6 @@
          */
         function shuffleList(list) {
             // Make a copy & don't mutate the passed in list
-            let result = list.slice(1);
 
             let tmp, j, i = list.length - 1
 
@@ -149,7 +149,7 @@
                 list[j] = tmp;
             }
 
-            return result;
+            return list;
         }
 
 
